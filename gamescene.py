@@ -4,6 +4,7 @@ import time
 
 from text import Text
 from line import Line
+from cell import Cell
 
 
 class GameScene:
@@ -20,6 +21,9 @@ class GameScene:
         self.elapsed_time = self.current_time - self.start_time
         
         self.num_bombs = num_bombs
+
+        # First click is true if we need to still generate bombs, otherwise false
+        self.first_click = True
         
         # Empty list to iterate over to display objects
         self.objects = []
@@ -37,7 +41,7 @@ class GameScene:
         self.screen = pygame.display.set_mode((self.total_width, self.total_height))
         
         # Add title text object
-        self.title = Text("Test Title", self.cell_height*2)
+        self.title = Text("Minesweeper", self.cell_height*2)
         self.title.text_rect.center = (self.total_width//2, self.title_height//2)
         self.objects.append(self.title)
         
@@ -54,6 +58,12 @@ class GameScene:
         # Generate line to separate title from cells
         line = Line((0, self.title_height), (self.total_width, self.title_height))
         self.objects.append(line)
+
+        # Test cell, REMOVE LATER
+        cell = Cell(0, 0, False, self.cell_height)
+        self.objects.append(cell)
+
+        # Generate cells, ensuring first clicked cell is a zero (no bombs around it)
     
     def render(self):
         
@@ -101,3 +111,6 @@ class GameScene:
             
             pygame.display.flip()
             self.clock.tick(self.fps)
+    
+    def place_mines(self):
+        pass
