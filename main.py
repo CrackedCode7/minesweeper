@@ -2,8 +2,9 @@ from gamescene import GameScene
 
 
 def main():
-
-    gamescene = GameScene(16, 30, 99, (800, 450))
+    
+    # cols, rows, num bombs, screen size
+    gamescene = GameScene(30, 16, 99, (320, 180))
     gamescene.loop()
 
 
